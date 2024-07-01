@@ -1,4 +1,4 @@
-version: '3.9' # Update to the latest version
+version: '3.9'
 
 services:
   bank-webhook:
@@ -9,6 +9,9 @@ services:
       - "8080:8080"
     environment:
       NODE_ENV: production
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
 
   user-app:
     build:
@@ -18,3 +21,6 @@ services:
       - "3000:3000"
     environment:
       NODE_ENV: production
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
