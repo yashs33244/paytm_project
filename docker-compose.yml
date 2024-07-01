@@ -1,0 +1,20 @@
+version: '3.9' # Update to the latest version
+
+services:
+  bank-webhook:
+    build:
+      context: .
+      dockerfile: ./docker/bank-webhook.Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      NODE_ENV: production
+
+  user-app:
+    build:
+      context: .
+      dockerfile: ./docker/user-app.Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production

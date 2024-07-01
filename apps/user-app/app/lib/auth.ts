@@ -1,8 +1,9 @@
 import db from "@repo/db/client";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt";
+import { AuthOptions } from "next-auth";
 
-export const authOptions = {
+export const authOptions:AuthOptions = {
     providers: [
       CredentialsProvider({
           name: 'Credentials',
@@ -39,7 +40,7 @@ export const authOptions = {
                     update: {},
                     create: {
                       number: credentials.phone,
-                      password: await bcrypt.hash(credentials.password, 10),
+                      password: hashedPassword,
                       name: credentials.name,
                       Balance: {
                         create: {
