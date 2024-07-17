@@ -7,7 +7,7 @@ import { authOptions } from "../auth";
 export async function createOnRampTransaction(provider: string, amount: number) {
     // Ideally the token should come from the banking provider (hdfc/axis)
     const session = await getServerSession(authOptions);
-    if (!session?.user || !session.user?.id) {
+    if (!session?.user || !session.user?.email) {
         return {
             message: "Unauthenticated request"
         }
@@ -19,7 +19,7 @@ export async function createOnRampTransaction(provider: string, amount: number) 
             status: "Processing",
             startTime: new Date(),
             token: token,
-            userId: Number(session?.user?.id),
+            userId: Number(session?.user?.email),
             amount: amount * 100
         }
     });
