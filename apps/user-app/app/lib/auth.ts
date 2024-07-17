@@ -7,7 +7,6 @@ export const authOptions = {
       CredentialsProvider({
           name: 'Credentials',
           credentials: {
-            name: { label: "Name", type: "text", placeholder: "Full Name", required: true }, 
             phone: { label: "Phone number", type: "text", placeholder: "1231231231", required: true },
             password: { label: "Password", type: "password", required: true }
           },
@@ -34,21 +33,13 @@ export const authOptions = {
             }
 
             try {
-                const user = await db.user.upsert({
-                    where: { number:credentials.phone  },
-                    update: {},
-                    create: {
-                      number: credentials.phone,
-                      password: await bcrypt.hash(credentials.password, 10),
-                      name: credentials.name,
-                      Balance: {
-                        create: {
-                            amount: 0,
-                            locked: 0
-                        }
-                      },
-                    },
-                  })
+                const user = await db.user.create({
+                    data: {
+                        number: credentials.phone,
+                        password: hashedPassword
+                    }
+                });
+            
                 return {
                     id: user.id.toString(),
                     name: user.name,

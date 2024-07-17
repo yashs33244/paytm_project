@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  bank-webhook:
+    build:
+      context: .
+      dockerfile: ./docker/bank-webhook.Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/postgres
+    depends_on:
+      - db
+
+  user-app:
+    build:
+      context: .
+      dockerfile: ./docker/user-app.Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/postgres
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
