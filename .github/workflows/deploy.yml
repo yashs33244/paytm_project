@@ -1,46 +1,45 @@
 name: Build and Deploy to Docker Hub
 
-
 on:
   push:
     branches:
-      - master  # Adjusted to trigger on pushes to master
+      - master # Adjusted to trigger on pushes to master
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-    - name: Check Out Repo
-      uses: actions/checkout@v2
+      - name: Check Out Repo
+        uses: actions/checkout@v2
 
-    - name: Prepare Dockerfile
-      run: cp ./docker/Dockerfile.user ./Dockerfile
+      - name: Prepare Dockerfile
+        run: cp ./docker/user-app.Dockerfile ./Dockerfile
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and Push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        file: ./Dockerfile
-        push: true
-        tags: sudheer007dfs/my-app:latest
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: sudheer007dfs/my-app:latest
 
-    - name: Verify Pushed Image
-      run: docker pull sudheer007dfs/my-app:latest
+      - name: Verify Pushed Image
+        run: docker pull sudheer007dfs/my-app:latest
 
-    - name: Deploy to EC2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_USERNAMEE }}
-        script: |
-          sudo docker pull sudheer007dfs/my-app:latest
-          sudo docker stop my-app || true
-          sudo docker rm my-app || true
-          docker run -d  -e JWT_SECRET=${{secrets.JWT_SECRET}} -e DATABASE_URL=${{ secrets.DATABASE_URL}} -e NEXTAUTH_URL=${{secrets.NEXTAUTH_URL}} -p 3001:3001 sudheer007dfs/my-app:latest
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_USERNAMEE }}
+          script: |
+            sudo docker pull sudheer007dfs/my-app:latest
+            sudo docker stop my-app || true
+            sudo docker rm my-app || true
+            docker run -d  -e JWT_SECRET=${{secrets.JWT_SECRET}} -e DATABASE_URL=${{ secrets.DATABASE_URL}} -e NEXTAUTH_URL=${{secrets.NEXTAUTH_URL}} -p 3001:3001 sudheer007dfs/my-app:latest
