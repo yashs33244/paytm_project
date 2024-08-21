@@ -37,6 +37,7 @@ services:
       dockerfile: ./docker/user-app.Dockerfile
     ports:
       - "3000:3000"
+      - "5555:5555"
     environment:
       NODE_ENV: development
       DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/postgres
