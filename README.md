@@ -45,10 +45,12 @@ npm run dev
 ```
 
 # Project Demo
+
 ## System Design
-![System Desing](https://drive.google.com/file/d/1CypBC9q4T5RAgDwZjiGxTiZOKy-3-j8K/view?usp=sharing)
+![System Design](https://raw.githubusercontent.com/yourusername/yourrepository/main/assets/system_design.png)
 
 ## Add Money
-![Add Money Demo](https://drive.google.com/file/d/1CXRYFWiBv0hOsAmVkUjMwcu2aitc_-PG/view?usp=sharing)
+[![Add Money Demo](https://raw.githubusercontent.com/yourusername/yourrepository/main/assets/add_money_thumbnail.png)](https://raw.githubusercontent.com/yourusername/yourrepository/main/assets/add_money.mov)
+
 ## p2p Transfer
-![p2p Transfer Demo](https://drive.google.com/file/d/1A2LSZy5n8fY-4z9o3zgSdiu6ZMO0Av42/view?usp=sharing)
+[![p2p Transfer Demo](https://raw.githubusercontent.com/yourusername/yourrepository/main/assets/p2p_transfer_thumbnail.png)](https://raw.githubusercontent.com/yourusername/yourrepository/main/assets/p2p_transfer.mov)
