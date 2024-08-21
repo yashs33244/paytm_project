@@ -47,7 +47,7 @@ npm run dev
 # Project Demo
 
 ## System Design
-![System Design](https://drive.google.com/file/d/1CypBC9q4T5RAgDwZjiGxTiZOKy-3-j8K/view?usp=sharing)
+![System Design](system_design.png)
 
 ## Add Money
 [![Add Money Demo](https://raw.githubusercontent.com/yourusername/yourrepository/main/assets/add_money_thumbnail.png)](https://drive.google.com/file/d/1CXRYFWiBv0hOsAmVkUjMwcu2aitc_-PG/view?usp=sharing)
